@@ -1,0 +1,23 @@
+{
+    "name": "wizardstool/seo-audit",
+    "description": "Package for seo audit",
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "^10.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wizardstool\\SeoAudit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "shapito27"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "imangazaliev/didom": "^2.0",
+        "ext-mbstring": "*"
+    }
+}
