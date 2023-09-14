@@ -1,6 +1,7 @@
 {
     "name": "wizardstool/seo-audit",
     "description": "Package for seo audit",
+    "version": "1.0.0",
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^10.3"
