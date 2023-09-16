@@ -4,6 +4,8 @@ namespace Wizardstool\SeoAudit;
 use DiDom\Document;
 use DiDom\Element;
 use DiDom\Exceptions\InvalidSelectorException;
+use UnexpectedValueException;
+use Wizardstool\SeoAudit\Audits\Audit;
 
 class AuditBuilder
 {
@@ -23,7 +25,7 @@ class AuditBuilder
     private $document;
 
     /**
-     * @var array|null
+     * @var Audit[]|null
      */
     private $audits;
 
@@ -53,6 +55,7 @@ class AuditBuilder
 
     /**
      * @return void
+     * @throws InvalidSelectorException
      */
     public function run(): void
     {
@@ -60,9 +63,15 @@ class AuditBuilder
         $this->parseDescription();
         $this->parseCanonical();
 
-        foreach ($this->audits as $audit)
-        {
-            (new $audit())->run($this);
+        foreach ($this->audits as $audit) {
+            if ( ! $audit instanceof Audit) {
+                throw new UnexpectedValueException(
+                    sprintf('Audit %s must extend %s class!',
+                        get_class($audit),
+                        Audit::class)
+                );
+            }
+            $audit->run($this);
         }
     }
 

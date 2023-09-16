@@ -9,9 +9,6 @@ use Wizardstool\SeoAudit\AuditIssues;
 
 class DescriptionAudit extends Audit
 {
-    public const DESCRIPTION_MIN_LENGTH = 150;
-    public const DESCRIPTION_MAX_LENGTH = 170;
-
     protected $category = AuditBuilder::AUDIT_CATEGORY_SEO;
     protected $descriptionMinLength = 150;
     protected $descriptionMaxLength = 170;
@@ -79,5 +76,37 @@ class DescriptionAudit extends Audit
         } else {
             $this->addIssue($auditResult, AuditIssues::DESCRIPTION_NOT_FOUND, true);
         }
+    }
+
+    /**
+     * @param  int  $descriptionMinLength
+     */
+    public function setDescriptionMinLength(int $descriptionMinLength): void
+    {
+        $this->descriptionMinLength = $descriptionMinLength;
+    }
+
+    /**
+     * @param  int  $descriptionMaxLength
+     */
+    public function setDescriptionMaxLength(int $descriptionMaxLength): void
+    {
+        $this->descriptionMaxLength = $descriptionMaxLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDescriptionMinLength(): int
+    {
+        return $this->descriptionMinLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDescriptionMaxLength(): int
+    {
+        return $this->descriptionMaxLength;
     }
 }

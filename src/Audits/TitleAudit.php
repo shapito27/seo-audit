@@ -9,8 +9,6 @@ use Wizardstool\SeoAudit\AuditIssues;
 
 class TitleAudit extends Audit
 {
-    public const TITLE_MIN_LENGTH = 50;
-    public const TITLE_MAX_LENGTH = 60;
     protected $category = AuditBuilder::AUDIT_CATEGORY_SEO;
 
     protected $titleMinLength = 50;
@@ -112,4 +110,37 @@ class TitleAudit extends Audit
 
         return $duplicates;
     }
+
+    /**
+     * @param  int  $titleMinLength
+     */
+    public function setTitleMinLength(int $titleMinLength): void
+    {
+        $this->titleMinLength = $titleMinLength;
+    }
+
+    /**
+     * @param  int  $titleMaxLength
+     */
+    public function setTitleMaxLength(int $titleMaxLength): void
+    {
+        $this->titleMaxLength = $titleMaxLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTitleMinLength(): int
+    {
+        return $this->titleMinLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTitleMaxLength(): int
+    {
+        return $this->titleMaxLength;
+    }
+
 }

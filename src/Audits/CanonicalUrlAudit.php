@@ -60,8 +60,14 @@ class CanonicalUrlAudit extends Audit
                 return;
             }
 
-            if ( $canonicalUrl !== $audit->getPageUrl()) {
-                $this->addIssue($auditResult, AuditIssues::CANONICAL_NOT_SAME_AS_CURRENT_URL, ['canonical_url' => $canonicalUrl, 'page_url' => $audit->getPageUrl()]);
+            if ($canonicalUrl !== $audit->getPageUrl()) {
+                $this->addIssue($auditResult,
+                    AuditIssues::CANONICAL_NOT_SAME_AS_CURRENT_URL,
+                    [
+                        'canonical_url' => $canonicalUrl,
+                        'page_url'      => $audit->getPageUrl(),
+                    ]
+                );
 
                 return;
             }

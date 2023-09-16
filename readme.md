@@ -1,7 +1,7 @@
 Html document seo audit (WIP)
 ==========
 
-This tool applies different SEO audits. 
+This tool applies different SEO audits to HTML page. 
 
 How it works:
 ----------
@@ -16,7 +16,7 @@ How it works:
 Features
 ---------
 
-* Extracting main SEO data: title, description, keywords, canonical and etc.
+* Extracting main SEO data: title, description, keywords, canonical etc.
 * Title audits:
   * Title exist
   * Title not empty
@@ -35,7 +35,7 @@ Features
   * Canonical not equal page URL
   * No Canonical duplicates
   * Canonical within head
-* It's easy to add new custom Audit
+* It's possible to create your own custom Audit and pass to `AuditBuilder`
 
 
 Quick Start
@@ -53,9 +53,9 @@ use Wizardstool\SeoAudit\Audits\TitleAudit;
 use Wizardstool\SeoAudit\AuditIssues;
 
 $subAudits = [
-    TitleAudit::class,
-    DescriptionAudit::class,
-    CanonicalUrlAudit::class,
+    new TitleAudit(),
+    new DescriptionAudit(),
+    new CanonicalUrlAudit(),
 ];
 
 $html = <<<'HTML'
@@ -128,12 +128,26 @@ $result = $audit->getAuditResult();
 $titleTooShortResult = $result->getIssues()['seo'][TitleAudit::class][AuditIssues::TITLE_TOO_SHORT];
 if (isset($titleTooShortResult['length'])) {
     echo sprintf('Title "%s" is too short, its length %d. It should be atleast %d characters.', $result->getTitle(),
-        $titleTooShortResult['length'], TitleAudit::TITLE_MIN_LENGTH);
+        $titleTooShortResult['length'], (new TitleAudit())->getTitleMinLength());
 }
 ```
 Output:
 ```shell
 Title "This is title" is too short, its length 13. It should be atleast 50 characters.
+```
+Customize audit
+---------------
+```php
+$titleAudit = new TitleAudit();
+// setup custom title limits
+$titleAudit->setTitleMinLength(45);
+$titleAudit->setTitleMaxLength(70);
+
+$subAudits = [
+    $titleAudit,
+    new DescriptionAudit(),
+    new CanonicalUrlAudit(),
+];
 ```
 
 Tests
