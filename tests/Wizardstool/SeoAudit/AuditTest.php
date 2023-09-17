@@ -25,7 +25,7 @@ class AuditTest extends TestCase
 
     public function testTitleAuditNoIssue(): void
     {
-        $subAudits = [TitleAudit::class];
+        $subAudits = [new TitleAudit()];
         $audit     = new AuditBuilder(
             'https://my-url-for-test.com',
             '<html><head><title>This is small html document with correct title ....</title></head></html>',
@@ -45,7 +45,7 @@ class AuditTest extends TestCase
      */
     public function testTitleAudit(string $html, int $issueId): void
     {
-        $subAudits = [TitleAudit::class];
+        $subAudits = [new TitleAudit()];
         $audit     = new AuditBuilder(
             'https://my-url-for-test.com',
             $html,
@@ -106,7 +106,7 @@ class AuditTest extends TestCase
 
     public function testDescriptionAuditNoIssue(): void
     {
-        $subAudits = [DescriptionAudit::class];
+        $subAudits = [new DescriptionAudit()];
         $audit     = new AuditBuilder(
             'https://my-url-for-test.com',
             '<html><head><meta name="description" content="This is document with description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." /></head></html>',
@@ -126,7 +126,7 @@ class AuditTest extends TestCase
      */
     public function testDescriptionAudit(string $html, int $issueId): void
     {
-        $subAudits = [DescriptionAudit::class];
+        $subAudits = [new DescriptionAudit()];
         $audit     = new AuditBuilder(
             'https://my-url-for-test.com',
             $html,
@@ -188,7 +188,7 @@ class AuditTest extends TestCase
     public function testCanonicalUrlAuditNoIssue(): void
     {
         $canonicalUrl = 'https://my-url-for-test.com';
-        $subAudits = [CanonicalUrlAudit::class];
+        $subAudits = [new CanonicalUrlAudit()];
         $audit     = new AuditBuilder(
             $canonicalUrl,
             sprintf('<html><head><link rel="canonical" href="%s"></head></html>', $canonicalUrl),
@@ -208,7 +208,7 @@ class AuditTest extends TestCase
      */
     public function testCanonicalUrlAudit(string $html, int $issueId): void
     {
-        $subAudits = [CanonicalUrlAudit::class];
+        $subAudits = [new CanonicalUrlAudit()];
         $audit     = new AuditBuilder(
             'https://my-url-for-test.com',
             $html,

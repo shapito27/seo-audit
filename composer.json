@@ -1,7 +1,7 @@
 {
     "name": "wizardstool/seo-audit",
     "description": "Package for seo audit",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "require-dev": {
         "roave/security-advisories": "dev-latest",
@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "imangazaliev/didom": "^2.0",
+        "imangazaliev/didom": "^1.18",
         "ext-mbstring": "*"
     }
 }
