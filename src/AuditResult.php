@@ -10,6 +10,7 @@ class AuditResult
     private $title = '';
     private $description = '';
     private $canonicalUrl = '';
+    private $htmlLang = '';
     private $issues = [];
 
     /**
@@ -87,5 +88,15 @@ class AuditResult
     public function setCanonicalUrl(string $canonicalUrl): void
     {
         $this->canonicalUrl = $canonicalUrl;
+    }
+
+    public function getHtmlLang(): string
+    {
+        return $this->htmlLang;
+    }
+
+    public function setHtmlLang(string $htmlLang): void
+    {
+        $this->htmlLang = $htmlLang;
     }
 }

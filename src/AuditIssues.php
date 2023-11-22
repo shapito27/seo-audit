@@ -30,4 +30,8 @@ class AuditIssues
     public const CANONICAL_CORRECT = 5;
     public const CANONICAL_NOT_WITHIN_HEAD = 6;
     public const CANONICAL_NOT_SAME_AS_CURRENT_URL = 7;
+
+    public const HTML_LANG_EMPTY = 3;
+    public const HTML_LANG_NOT_VALID = 4;
+    public const HTML_LANG_NOT_SAME_AS_ON_PAGE = 7;
 }

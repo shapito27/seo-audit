@@ -62,6 +62,7 @@ class AuditBuilder
         $this->parseTitle();
         $this->parseDescription();
         $this->parseCanonical();
+        $this->parseHtmlLanguage();
 
         foreach ($this->audits as $audit) {
             if ( ! $audit instanceof Audit) {
@@ -100,6 +101,14 @@ class AuditBuilder
         $canonical = $this->getDocument()->first("link[rel='canonical']");
         if($canonical instanceof Element) {
             $this->auditResult->setCanonicalUrl($canonical->href);
+        }
+    }
+
+    public function parseHtmlLanguage(): void
+    {
+        $html = $this->getDocument()->first("html");
+        if($html instanceof Element) {
+            $this->auditResult->setHtmlLang($html->lang);
         }
     }
 
