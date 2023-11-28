@@ -34,4 +34,10 @@ class AuditIssues
     public const HTML_LANG_EMPTY = 3;
     public const HTML_LANG_NOT_VALID = 4;
     public const HTML_LANG_NOT_SAME_AS_ON_PAGE = 7;
+
+    public const VIEWPORT_NOT_FOUND = 1;
+    public const MANY_VIEWPORTS = 2;
+    public const VIEWPORT_EMPTY = 3;
+    public const VIEWPORT_NOT_VALID = 4;
+    public const VIEWPORT_NOT_WITHIN_HEAD = 9;
 }

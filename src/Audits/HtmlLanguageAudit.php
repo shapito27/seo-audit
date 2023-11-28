@@ -31,16 +31,17 @@ class HtmlLanguageAudit extends Audit
             $this->addIssue($auditResult, AuditIssues::HTML_LANG_EMPTY, true);
 
             return;
-        } else {
-            //check that html lang valid value
-            try {
-                $this->validateHtmlLang($htmlLang);
-            } catch (\RuntimeException $exception) {
-                $this->addIssue($auditResult, AuditIssues::HTML_LANG_NOT_VALID, [$exception->getMessage()]);
-                return;
-            }
+        }
 
-            //@todo can add https://github.com/patrickschur/language-detection for text detection
+        //check that html lang valid value
+        try {
+            $this->validateHtmlLang($htmlLang);
+        } catch (\RuntimeException $exception) {
+            $this->addIssue($auditResult, AuditIssues::HTML_LANG_NOT_VALID, [$exception->getMessage()]);
+            return;
+        }
+
+        //@todo can add https://github.com/patrickschur/language-detection for text detection
 //            if ($htmlLang !== $audit->getPageUrl()) {
 //                $this->addIssue($auditResult,
 //                    AuditIssues::CANONICAL_NOT_SAME_AS_CURRENT_URL,
@@ -52,7 +53,7 @@ class HtmlLanguageAudit extends Audit
 //
 //                return;
 //            }
-        }
+
     }
 
     protected function validateHtmlLang(string $htmlLang): void

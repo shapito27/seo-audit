@@ -40,7 +40,7 @@ class TitleAudit extends Audit
         } elseif ($numberOfElements === 1) {
             $parent = $titles[0]->parent();
             if ($parent === null) {
-                throw new RuntimeException('Can\'t parse title parent');
+                throw new RuntimeException('Can\'t parse title parent tag');
             }
             $title = $auditResult->getTitle();
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wizardstool\SeoAudit;
 
 use DiDom\Document;
@@ -39,17 +40,17 @@ class AuditBuilder
     public const AUDIT_CATEGORY_PERFORMANCE = 'performance';
 
     /**
-     * @param  string  $url
-     * @param  string  $content  html content
-     * @param  array|null  $audits
+     * @param string $url
+     * @param string $content html content
+     * @param array|null $audits
      */
     public function __construct(string $url, string $content, ?array $audits)
     {
         $this->pageUrl = $url;
         $this->content = $content;
-        $this->audits = $audits;
+        $this->audits  = $audits;
         // parse html
-        $this->document = new Document($content, false);
+        $this->document    = new Document($content, false);
         $this->auditResult = new AuditResult();
     }
 
@@ -63,9 +64,10 @@ class AuditBuilder
         $this->parseDescription();
         $this->parseCanonical();
         $this->parseHtmlLanguage();
+        $this->parseViewport();
 
         foreach ($this->audits as $audit) {
-            if ( ! $audit instanceof Audit) {
+            if (!$audit instanceof Audit) {
                 throw new UnexpectedValueException(
                     sprintf('Audit %s must extend %s class!',
                         get_class($audit),
@@ -83,7 +85,7 @@ class AuditBuilder
     public function parseTitle(): void
     {
         $title = $this->document->first('title');
-        if($title instanceof Element) {
+        if ($title instanceof Element) {
             $this->auditResult->setTitle($title->text());
         }
     }
@@ -91,7 +93,7 @@ class AuditBuilder
     public function parseDescription(): void
     {
         $description = $this->getDocument()->first("meta[name='description']");
-        if($description instanceof Element) {
+        if ($description instanceof Element) {
             $this->auditResult->setDescription($description->content);
         }
     }
@@ -99,7 +101,7 @@ class AuditBuilder
     public function parseCanonical(): void
     {
         $canonical = $this->getDocument()->first("link[rel='canonical']");
-        if($canonical instanceof Element) {
+        if ($canonical instanceof Element) {
             $this->auditResult->setCanonicalUrl($canonical->href);
         }
     }
@@ -107,8 +109,16 @@ class AuditBuilder
     public function parseHtmlLanguage(): void
     {
         $html = $this->getDocument()->first("html");
-        if($html instanceof Element) {
+        if ($html instanceof Element) {
             $this->auditResult->setHtmlLang($html->lang);
+        }
+    }
+
+    public function parseViewport(): void
+    {
+        $html = $this->getDocument()->first("meta[name='viewport']");
+        if ($html instanceof Element) {
+            $this->auditResult->setViewport($html->content);
         }
     }
 
@@ -121,7 +131,7 @@ class AuditBuilder
     }
 
     /**
-     * @param  string  $pageUrl
+     * @param string $pageUrl
      */
     public function setPageUrl(string $pageUrl): void
     {
@@ -137,7 +147,7 @@ class AuditBuilder
     }
 
     /**
-     * @param  string  $content
+     * @param string $content
      */
     public function setContent(string $content): void
     {
@@ -153,7 +163,7 @@ class AuditBuilder
     }
 
     /**
-     * @param  Document  $document
+     * @param Document $document
      */
     public function setDocument(Document $document): void
     {
@@ -169,7 +179,7 @@ class AuditBuilder
     }
 
     /**
-     * @param  mixed  $audits
+     * @param mixed $audits
      */
     public function setAudits($audits): void
     {
@@ -185,7 +195,7 @@ class AuditBuilder
     }
 
     /**
-     * @param  AuditResult  $auditResult
+     * @param AuditResult $auditResult
      */
     public function setAuditResult(AuditResult $auditResult): void
     {

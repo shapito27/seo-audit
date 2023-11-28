@@ -11,6 +11,7 @@ class AuditResult
     private $description = '';
     private $canonicalUrl = '';
     private $htmlLang = '';
+    private $viewport = '';
     private $issues = [];
 
     /**
@@ -98,5 +99,15 @@ class AuditResult
     public function setHtmlLang(string $htmlLang): void
     {
         $this->htmlLang = $htmlLang;
+    }
+
+    public function getViewport(): string
+    {
+        return $this->viewport;
+    }
+
+    public function setViewport(string $viewport): void
+    {
+        $this->viewport = $viewport;
     }
 }
